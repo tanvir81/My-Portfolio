@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import profileImg from '../assets/profile.jpg';
+import profileImg from '../assets/profile.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -89,7 +90,7 @@ const About = () => {
     >
       <main className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <motion.div
-          className="max-w-6xl mx-auto w-full"
+          className="max-w-7xl mx-auto w-full"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
@@ -127,28 +128,29 @@ const About = () => {
                   className="line text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
                   variants={itemVariants}
                 >
-                  I'm a Full-Stack Developer Shopify Expert from Dhaka Bangladesh With a background in
-                  Graphic Design and Animation, I've been utilizing my skills to develop modern,
-                  creative websites for 2 years. With a strong focus on Frontend Development, I
-                  work with React, Next.js, and Tailwind CSS to create responsive, user-friendly
-                  websites.
+                  My journey into tech began with a curiosity for Graphic Design and Animation, which laid the foundation for my transition into Full-Stack Development. Over the last 2 years, I've honed my skills in the MERN stack (React, Node.js, MongoDB), finding my true passion in creating websites that are both functional and visually striking.
+                  <br /><br />
+                  I thrive on building modern, minimal interfaces where every animation serves a purpose. I believe a great website should feel alive, and I love the challenge of blending performance with aesthetics.
+                  <br /><br />
+                  When I'm not debugging code or tweaking animations, you'll find me on the court playing badminton. It's my favorite way to recharge, stay active, and keep my mind sharp.
                 </motion.p>
               </div>
               <motion.div variants={itemVariants}>
-                <motion.a
-                  className="inline-block bg-primary text-white font-medium py-3 px-8 rounded-lg shadow-lg relative overflow-hidden group"
-                  href="#"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <motion.span
-                    className="absolute inset-0 bg-white/20"
-                    initial={{ x: '-100%', skewX: -15 }}
-                    whileHover={{ x: '100%' }}
-                    transition={{ duration: 0.6 }}
-                  />
-                  <span className="relative z-10">My Work</span>
-                </motion.a>
+                <Link to="/project" className="inline-block relative overflow-hidden rounded-lg shadow-lg group">
+                  <motion.div
+                    className="bg-primary text-white font-medium py-3 px-8"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.span
+                      className="absolute inset-0 bg-white/20"
+                      initial={{ x: '-100%', skewX: -15 }}
+                      whileHover={{ x: '100%' }}
+                      transition={{ duration: 0.6 }}
+                    />
+                    <span className="relative z-10">My Work</span>
+                  </motion.div>
+                </Link>
               </motion.div>
             </motion.div>
 
@@ -184,6 +186,51 @@ const About = () => {
               </motion.div>
             </motion.div>
           </div>
+
+          <motion.div
+            className="mt-16 sm:mt-24"
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white">Education</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {[
+                {
+                  degree: 'M.Com (Management)',
+                  institution: 'Gov. Titumir College, Dhaka',
+                  year: 'Completed',
+                  icon: 'school'
+                },
+                {
+                  degree: 'B.Com (Honours) Management',
+                  institution: 'Gov. Edward College, Pabna',
+                  year: 'Completed',
+                  icon: 'school'
+                }
+              ].map((edu, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white/5 dark:bg-white/5 p-6 rounded-xl border border-gray-200 dark:border-white/10 hover:border-primary/50 transition-colors"
+                  whileHover={{ y: -5, backgroundColor: 'rgba(255, 255, 255, 0.08)' }}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-primary/20 rounded-lg text-primary">
+                      <span className="material-icons">{edu.icon}</span>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{edu.degree}</h3>
+                      <p className="text-gray-600 dark:text-gray-400 mb-2">{edu.institution}</p>
+                      <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
+                        {edu.year}
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </main>
     </section>

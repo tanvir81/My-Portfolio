@@ -18,6 +18,9 @@ export default {
       borderRadius: {
         DEFAULT: "0.5rem", // 8px
       },
+      animation: {
+        'spin-slow': 'spin 8s linear infinite',
+      },
     },
   },
   plugins: [],

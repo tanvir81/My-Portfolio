@@ -1,42 +1,14 @@
 import { useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import foodImg from '../assets/food.jpg';
-import storeImg from '../assets/store.jpg';
-import businessImg from '../assets/business.jpg';
-import hotelImg from '../assets/hotel.jpg';
+import { projects } from '../data/projects';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
-  {
-    title: 'E-commerce Platform',
-    description: 'A full-stack online store with a modern UI, built with React and Node.js for a seamless shopping experience.',
-    tags: ['React', 'Node.js', 'MongoDB'],
-    image: storeImg
-  },
-  {
-    title: 'Task Management App',
-    description: 'A productivity tool for organizing daily tasks with a clean, intuitive drag-and-drop interface.',
-    tags: ['Next.js', 'Tailwind CSS', 'Firebase'],
-    image: businessImg
-  },
-  {
-    title: 'Luxury Hotel Website',
-    description: 'A premium booking platform for high-end hotels, featuring virtual tours and real-time availability.',
-    tags: ['React', 'Next.js', 'Tailwind CSS','Firebase'],
-    image: hotelImg
-  },
-  {
-    title: 'Food Delivery App',
-    description: 'A delicious food ordering experience with live tracking, diverse cuisines, and instant payments.',
-    tags: ['React', 'MongoDB', 'Stripe','Next Auth'],
-    image: foodImg
-  }
-];
-
 const Projects = () => {
+  const location = useLocation();
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const projectRefs = useRef([]);
@@ -110,9 +82,7 @@ const Projects = () => {
   return (
     <section ref={sectionRef} className="bg-black font-display overflow-hidden">
       <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root">
-        <div className="layout-container flex h-full grow flex-col">
-          <div className="px-4 sm:px-8 md:px-20 lg:px-40 flex flex-1 justify-center py-5">
-            <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 w-full">
               <main className="flex-grow mt-10 sm:mt-16">
                 <motion.div
                   className="flex flex-wrap justify-between gap-3 p-4"
@@ -140,11 +110,11 @@ const Projects = () => {
                 </motion.p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-4">
-                  {projects.map((project, index) => (
+                  {projects.slice(0, location.pathname === '/' ? 3 : undefined).map((project, index) => (
                     <motion.div
                       key={index}
                       ref={(el) => (projectRefs.current[index] = el)}
-                      className="flex flex-col gap-4 bg-black p-4 rounded-xl border border-[#233f48] relative overflow-hidden group cursor-pointer"
+                      className="flex flex-col gap-4 bg-black p-4 rounded-xl border border-[#233f48] relative overflow-hidden group"
                       whileHover={{ y: -10, scale: 1.02 }}
                       transition={{ duration: 0.3 }}
                     >
@@ -166,11 +136,11 @@ const Projects = () => {
                         <h3 className="text-white text-xl font-bold leading-normal">
                           {project.title}
                         </h3>
-                        <p className="text-[#92bbc9] text-sm font-normal leading-normal">
+                        <p className="text-[#92bbc9] text-sm font-normal leading-normal line-clamp-2">
                           {project.description}
                         </p>
                         <div className="flex flex-wrap gap-2 pt-1">
-                          {project.tags.map((tag) => (
+                          {project.technologies.slice(0, 4).map((tag) => (
                             <motion.span
                               key={tag}
                               className="text-xs font-medium text-primary bg-primary/20 px-2 py-1 rounded-full"
@@ -179,30 +149,72 @@ const Projects = () => {
                               {tag}
                             </motion.span>
                           ))}
+                          {project.technologies.length > 4 && (
+                            <span className="text-xs font-medium text-gray-400 px-2 py-1">+{project.technologies.length - 4} more</span>
+                          )}
                         </div>
                       </div>
                       
-                      <div className="flex items-center gap-4 mt-2 relative z-10">
-                        <motion.a
-                          className="flex items-center gap-2 text-sm font-medium text-white hover:text-primary transition-colors"
-                          href="#"
-                          whileHover={{ x: 5 }}
-                        >
-                          <span className="material-icons text-xl">open_in_new</span>
-                          Live Demo
-                        </motion.a>
-                        <motion.a
-                          className="flex items-center gap-2 text-sm font-medium text-white hover:text-primary transition-colors"
-                          href="#"
-                          whileHover={{ x: 5 }}
-                        >
-                          <span className="material-icons text-xl">code</span>
-                          View Code
-                        </motion.a>
+                      <div className="flex flex-wrap items-center gap-4 mt-2 relative z-10">
+                        <Link to={`/project/${project.id}`}>
+                          <motion.div
+                            className="flex items-center gap-2 text-sm font-bold text-primary hover:text-white transition-colors bg-primary/10 px-4 py-2 rounded-lg"
+                            whileHover={{ scale: 1.05, backgroundColor: 'rgba(59, 130, 246, 0.8)' }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <span className="material-icons text-lg">visibility</span>
+                            View Details
+                          </motion.div>
+                        </Link>
+
+                        {project.liveLink && (
+                          <motion.a
+                            className="flex items-center gap-2 text-sm font-medium text-white hover:text-primary transition-colors"
+                            href={project.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ x: 5 }}
+                          >
+                            <span className="material-icons text-xl">open_in_new</span>
+                            Live Demo
+                          </motion.a>
+                        )}
+                        {project.codeLink && project.codeLink !== '#' && (
+                          <motion.a
+                            className="flex items-center gap-2 text-sm font-medium text-white hover:text-primary transition-colors"
+                            href={project.codeLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ x: 5 }}
+                          >
+                            <span className="material-icons text-xl">code</span>
+                            View Code
+                          </motion.a>
+                        )}
                       </div>
                     </motion.div>
                   ))}
                 </div>
+
+                {location.pathname === '/' && (
+                  <motion.div 
+                    className="flex justify-center mt-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                  >
+                    <Link to="/project">
+                      <motion.button
+                        className="flex items-center gap-2 px-8 py-3 bg-white/5 border border-white/20 hover:bg-white/10 text-white rounded-full font-bold transition-all group"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        View All Projects
+                        <span className="material-icons group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                      </motion.button>
+                    </Link>
+                  </motion.div>
+                )}
               </main>
 
               <motion.div
@@ -247,9 +259,7 @@ const Projects = () => {
                   </div>
                 </div>
               </motion.div>
-            </div>
           </div>
-        </div>
       </div>
     </section>
   );

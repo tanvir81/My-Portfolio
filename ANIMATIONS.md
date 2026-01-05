@@ -53,6 +53,18 @@
 - **Email icon** - Continuous subtle rotation animation
 - **Button shine** - Skewed shine effect on submit button
 
+### Error Page (404)
+- **Glitch effect** - Continuous glitch animation on 404 text
+- **RGB split** - Red and cyan color separation layers
+- **Floating numbers** - Each digit floats and rotates independently
+- **Particle system** - 20+ animated particles floating upward
+- **Animated robot** - SVG robot with moving parts (eyes, antenna, arms)
+- **Pulsing glow** - Text shadow pulse effect
+- **Grid background** - Subtle animated grid pattern
+- **Geometric shapes** - Rotating circles and squares
+- **Button animations** - Shine and scale effects
+- **Entrance animation** - Elastic scale-in effect
+
 ## Animation Techniques Used
 
 1. **GSAP ScrollTrigger** - Scroll-based animations

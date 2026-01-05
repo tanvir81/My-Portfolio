@@ -19,8 +19,8 @@ import photoshopIcon from '../assets/photoshop.png';
 import illustratorIcon from '../assets/illustrator.png';
 import canvaIcon from '../assets/canva.png';
 import slackIcon from '../assets/icons8-slack-48.png';
-import gitIcon from '../assets/git.png'; // Added Git if user wants to use it, though not in original list explicitly as separate item usually, but good to have.
-import shopifyIcon from '../assets/shopify.png'; // Available in assets
+import gitIcon from '../assets/git.png'; 
+import shopifyIcon from '../assets/shopify.png'; 
 import firebaseIcon from '../assets/firebase.png';
 import npmIcon from '../assets/npm.png';
 

@@ -75,8 +75,8 @@ const Header = () => {
   };
 
   return (
-    <header ref={headerRef} className="py-4 px-6 sm:px-10 lg:px-16 sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80">
-      <nav className="container mx-auto flex justify-between items-center">
+    <header ref={headerRef} className="py-4 sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80">
+      <nav className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <Link to="/">
           <motion.div
             ref={logoRef}
@@ -116,7 +116,9 @@ const Header = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1, duration: 0.5, ease: 'backOut' }}
           className="hidden md:inline-block bg-primary text-white font-medium py-2 px-5 rounded-md hover:bg-opacity-90 transition-all duration-300"
-          href="#"
+          href="https://drive.google.com/file/d/16xg_t5Ictnq8jNTJTmVSTLVwyT4IQylV/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
           whileHover={{ scale: 1.05, boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}
           whileTap={{ scale: 0.95 }}
         >
